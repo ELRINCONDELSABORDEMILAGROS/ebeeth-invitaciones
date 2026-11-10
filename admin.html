@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel EBEETH</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;padding:22px 14px;
+  background:linear-gradient(135deg,#fce8eb,#fff9f0);
+  font-family:Arial,sans-serif;color:#79545a
+}
+.panel{
+  max-width:520px;margin:auto;background:white;
+  padding:25px;border-radius:18px;
+  border:1px solid #e4c58c;
+  box-shadow:0 10px 30px #a8794520
+}
+h1{text-align:center;color:#bd914d;letter-spacing:3px}
+.subtitle{text-align:center;margin-bottom:25px}
+label{display:block;margin:14px 0 6px;font-weight:bold;font-size:13px}
+input,select,textarea{
+  width:100%;padding:12px;border:1px solid #e5cbd0;
+  border-radius:9px;font-size:15px;background:#fffdfc
+}
+button{
+  width:100%;padding:14px;margin-top:18px;
+  border:0;border-radius:30px;background:#bd914d;
+  color:white;font-weight:bold;font-size:15px;cursor:pointer
+}
+.result{
+  display:none;margin-top:20px;padding:15px;
+  background:#fff1f3;border-radius:12px;
+  overflow-wrap:anywhere
+}
+.result a{color:#a36e39}
+.secondary{background:#278e5b}
+.note{font-size:12px;color:#977d78;line-height:1.5}
+</style>
+</head>
+
+<body>
+<div class="panel">
+
+<h1>EBEETH</h1>
+<div class="subtitle">ARTE & SABOR<br>Panel de invitaciones digitales</div>
+
+<form id="formulario">
+
+<label>Nombre del cumpleañero/a</label>
+<input id="nombre" required placeholder="Ej. Sofía">
+
+<label>Edad</label>
+<input id="edad" type="number" min="1" max="120" required placeholder="Ej. 7">
+
+<label>Fecha</label>
+<input id="fecha" required placeholder="Ej. 20 de diciembre">
+
+<label>Horario</label>
+<input id="hora" required placeholder="Ej. 17:00 hs">
+
+<label>Nombre del salón o lugar</label>
+<input id="lugar" value="EBEETH ARTE & SABOR" required>
+
+<label>Dirección</label>
+<input id="direccion" placeholder="Dirección del evento">
+
+<label>Enlace de Google Maps (opcional)</label>
+<input id="mapa" type="url" placeholder="https://maps.google.com/...">
+
+<label>WhatsApp para confirmar asistencia</label>
+<input id="wa" type="tel" required placeholder="54911XXXXXXXX">
+
+<label>Temática del cumpleaños</label>
+<select id="tema">
+<option value="princesas">Princesas</option>
+<option value="frozen">Frozen</option>
+<option value="sirenas">Sirenas</option>
+<option value="unicornios">Unicornios</option>
+<option value="futbol">Fútbol</option>
+<option value="dinosaurios">Dinosaurios</option>
+</select>
+
+<label>Mensaje personalizado (opcional)</label>
+<textarea id="mensaje" rows="3" placeholder="¡Te espero para celebrar conmigo!"></textarea>
+
+<button type="submit">✨ GENERAR INVITACIÓN</button>
+</form>
+
+<div class="result" id="resultado">
+<strong>¡Tu invitación está lista! 💗</strong>
+<p class="note">Copiá este enlace y enviáselo a tu cliente para que lo comparta con sus invitados.</p>
+<a id="enlace" href="#" target="_blank"></a>
+<button class="secondary" type="button" onclick="copiar()">COPIAR ENLACE</button>
+<button type="button" onclick="abrir()">VER INVITACIÓN</button>
+</div>
+
+</div>
+
+<script>
+let enlaceGenerado = "";
+
+document.getElementById("formulario").addEventListener("submit",function(e){
+  e.preventDefault();
+
+  const datos = {
+    nombre:document.getElementById("nombre").value.trim(),
+    edad:document.getElementById("edad").value,
+    fecha:document.getElementById("fecha").value.trim(),
+    hora:document.getElementById("hora").value.trim(),
+    lugar:document.getElementById("lugar").value.trim(),
+    direccion:document.getElementById("direccion").value.trim(),
+    mapa:document.getElementById("mapa").value.trim(),
+    wa:document.getElementById("wa").value.replace(/\D/g,""),
+    tema:document.getElementById("tema").value,
+    mensaje:document.getElementById("mensaje").value.trim()
+  };
+
+  if(!/^https:\/\//i.test(datos.mapa) && datos.mapa){
+    alert("El enlace de Maps debe comenzar con https://");
+    return;
+  }
+
+  if(datos.wa.length < 10){
+    alert("Revisá el número de WhatsApp con código de país y área.");
+    return;
+  }
+
+  const base = new URL("index.html",window.location.href);
+  base.search = new URLSearchParams(datos).toString();
+
+  enlaceGenerado = base.href;
+
+  document.getElementById("enlace").href = enlaceGenerado;
+  document.getElementById("enlace").textContent = enlaceGenerado;
+  document.getElementById("resultado").style.display = "block";
+
+  document.getElementById("resultado").scrollIntoView({
+    behavior:"smooth"
+  });
+});
+
+async function copiar(){
+  try{
+    await navigator.clipboard.writeText(enlaceGenerado);
+    alert("¡Enlace copiado! Ya podés compartirlo.");
+  }catch(e){
+    alert("No se pudo copiar automáticamente. Seleccioná y copiá el enlace.");
+  }
+}
+
+function abrir(){
+  if(enlaceGenerado) window.open(enlaceGenerado,"_blank");
+}
+</script>
+
+</body>
+</html>
