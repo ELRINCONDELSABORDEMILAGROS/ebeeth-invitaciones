@@ -4,373 +4,480 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fcebed">
 <title>EBEETH | Invitaciones Digitales</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
-
-body{
- margin:0;
- min-height:100vh;
- background:linear-gradient(135deg,#fce8eb,#fff9f0,#f7e4e7);
- color:#77504d;
- font-family:'Poppins',sans-serif;
- text-align:center;
+* {
+  box-sizing: border-box;
 }
 
-.container{
- width:100%;
- max-width:520px;
- margin:auto;
- padding:30px 16px;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fce8eb, #fff9f0, #f7e4e7);
+  color: #77504d;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
 }
 
-.brand{
- color:#b98a48;
- letter-spacing:5px;
- font-size:17px;
- font-weight:600;
+.container {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  padding: 30px 16px;
 }
 
-.brand-sub{
- font-family:'Playfair Display',serif;
- color:#986b50;
- font-size:14px;
- letter-spacing:2px;
+.brand {
+  color: #b98a48;
+  letter-spacing: 5px;
+  font-size: 19px;
+  font-weight: 600;
 }
 
-.tagline{
- font-family:'Great Vibes',cursive;
- color:#bd7788;
- font-size:29px;
- margin-top:15px;
+.brand-sub {
+  font-family: 'Playfair Display', serif;
+  color: #986b50;
+  font-size: 14px;
+  letter-spacing: 2px;
 }
 
-.stage{
- position:relative;
- height:430px;
- margin:15px auto 0;
+.tagline {
+  font-family: 'Great Vibes', cursive;
+  color: #bd7788;
+  font-size: 29px;
+  margin-top: 15px;
 }
 
-.envelope{
- position:absolute;
- width:min(290px,90%);
- height:185px;
- bottom:65px;
- left:50%;
- transform:translateX(-50%);
- background:#e9a8b5;
- border-radius:5px;
- box-shadow:0 15px 30px #8d52603d;
- z-index:3;
- cursor:pointer;
+/* ESPACIO DEL SOBRE */
+
+.stage {
+  position: relative;
+  height: 430px;
+  margin: 15px auto 0;
+  transition: height .6s ease;
 }
 
-.envelope-back{
- position:absolute;
- inset:0;
- background:#d98e9f;
- clip-path:polygon(0 0,100% 0,50% 100%);
+/* MÁS ESPACIO CUANDO SE ABRE */
+
+.stage.open {
+  height: 760px;
 }
 
-.envelope-front{
- position:absolute;
- inset:0;
- background:#f2c1ca;
- clip-path:polygon(0 100%,0 0,50% 62%,100% 0,100% 100%);
- z-index:3;
+/* SOBRE */
+
+.envelope {
+  position: absolute;
+  width: min(290px, 90%);
+  height: 185px;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e9a8b5;
+  border-radius: 5px;
+  box-shadow: 0 15px 30px #8d52603d;
+  z-index: 3;
+  cursor: pointer;
 }
 
-.flap{
- position:absolute;
- inset:0;
- background:#f7d3d8;
- clip-path:polygon(0 0,100% 0,50% 68%);
- transform-origin:top;
- transition:transform .9s ease;
- z-index:5;
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #d98e9f;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
-.seal{
- position:absolute;
- top:65px;
- left:50%;
- transform:translateX(-50%);
- width:47px;
- height:47px;
- border-radius:50%;
- background:linear-gradient(135deg,#f2d69b,#b78a42);
- color:white;
- display:grid;
- place-items:center;
- font-size:23px;
- z-index:6;
- transition:.4s;
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: #f2c1ca;
+  clip-path: polygon(0 100%, 0 0, 50% 62%, 100% 0, 100% 100%);
+  z-index: 3;
 }
 
-.invitation{
- position:absolute;
- width:min(310px,94%);
- left:50%;
- bottom:95px;
- transform:translate(-50%,150px) scale(.75);
- opacity:0;
- visibility:hidden;
- z-index:1;
- background:#fffdf9;
- border:2px solid #d9b875;
- border-radius:8px;
- padding:22px 17px;
- box-shadow:0 10px 35px #7b505044;
- transition:transform 1s ease,opacity .8s ease;
+.flap {
+  position: absolute;
+  inset: 0;
+  background: #f7d3d8;
+  clip-path: polygon(0 0, 100% 0, 50% 68%);
+  transform-origin: top;
+  transition: transform .9s ease;
+  z-index: 5;
 }
 
-.invitation:before{
- content:"";
- position:absolute;
- inset:6px;
- border:1px solid #e8d6ad;
- pointer-events:none;
+.seal {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f2d69b, #b78a42);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  z-index: 6;
+  transition: opacity .4s;
 }
 
-.stage.open .flap{
- transform:rotateX(180deg);
- z-index:1;
+/* TARJETA CERRADA */
+
+.invitation {
+  position: absolute;
+  width: min(310px, 94%);
+  left: 50%;
+  bottom: 95px;
+  top: auto;
+  transform: translate(-50%, 150px) scale(.75);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+  background: #fffdf9;
+  border: 2px solid #d9b875;
+  border-radius: 8px;
+  padding: 22px 17px;
+  box-shadow: 0 10px 35px #7b505044;
+  transition: transform 1s ease, opacity .8s ease;
 }
 
-.stage.open .seal{
- opacity:0;
+.invitation:before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid #e8d6ad;
+  pointer-events: none;
 }
 
-.stage.open .invitation{
- opacity:1;
- visibility:visible;
- transform:translate(-50%,-15px) scale(1);
- z-index:7;
+/* ANIMACIÓN DE APERTURA */
+
+.stage.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
 }
 
-.ornament{
- color:#c49a51;
- font-size:23px;
- margin:4px;
+.stage.open .seal {
+  opacity: 0;
 }
 
-.small-title{
- color:#bd8b4d;
- font-size:11px;
- letter-spacing:3px;
- text-transform:uppercase;
+.stage.open .invitation {
+  opacity: 1;
+  visibility: visible;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 7;
 }
 
-.invitation h2{
- font-family:'Great Vibes',cursive;
- font-size:48px;
- color:#c17b8e;
- margin:8px 0;
- font-weight:400;
+/* DISEÑO INTERIOR */
+
+.ornament {
+  color: #c49a51;
+  font-size: 23px;
+  margin: 4px;
 }
 
-.age{
- font-family:'Playfair Display',serif;
- font-size:38px;
- color:#bd914d;
+.small-title {
+  color: #bd8b4d;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.message{
- font-family:'Playfair Display',serif;
- font-style:italic;
- font-size:15px;
- margin:10px 0;
+.invitation h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  color: #c17b8e;
+  margin: 8px 0;
+  font-weight: 400;
+  overflow-wrap: anywhere;
 }
 
-.line{
- width:65%;
- border-top:1px solid #dfc18b;
- margin:12px auto;
+.age {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  color: #bd914d;
 }
 
-.details{
- font-size:13px;
- line-height:2;
- color:#775c55;
+.message {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  margin: 10px 0;
 }
 
-.details div{margin:3px 0}
-
-.button{
- display:block;
- max-width:240px;
- margin:12px auto;
- padding:11px 14px;
- border-radius:30px;
- background:linear-gradient(135deg,#d5b36d,#b78b42);
- color:white;
- text-decoration:none;
- font-size:12px;
- font-weight:500;
- position:relative;
- z-index:2;
+.line {
+  width: 65%;
+  border-top: 1px solid #dfc18b;
+  margin: 12px auto;
 }
 
-.button.whatsapp{
- background:#278e5b;
+.details {
+  font-size: 13px;
+  line-height: 2;
+  color: #775c55;
+  overflow-wrap: anywhere;
 }
 
-.footer{
- margin-top:18px;
- color:#a67b72;
- font-size:11px;
- line-height:1.8;
+.details div {
+  margin: 3px 0;
 }
 
-.footer strong{
- color:#b58b4c;
- letter-spacing:2px;
+.button {
+  display: block;
+  max-width: 240px;
+  margin: 12px auto;
+  padding: 11px 14px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #d5b36d, #b78b42);
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 
-.tap{
- position:absolute;
- bottom:20px;
- width:100%;
- font-size:13px;
- color:#a16b79;
+.button.whatsapp {
+  background: #278e5b;
 }
 
-@media(max-width:360px){
- .invitation{padding:17px 12px}
- .invitation h2{font-size:41px}
- .details{font-size:12px}
+.footer {
+  margin-top: 18px;
+  color: #a67b72;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.footer strong {
+  color: #b58b4c;
+  letter-spacing: 2px;
+}
+
+.tap {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  font-size: 13px;
+  color: #a16b79;
+  transition: opacity .4s;
+}
+
+.stage.open .tap {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* CELULARES */
+
+@media(max-width: 400px) {
+  .stage.open {
+    height: 740px;
+  }
+
+  .invitation {
+    width: 94%;
+    padding: 19px 13px;
+  }
+
+  .invitation h2 {
+    font-size: 43px;
+  }
+
+  .details {
+    font-size: 12px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
+}
+
+/* PANTALLAS BAJAS */
+
+@media(max-height: 650px) {
+  .container {
+    padding-top: 15px;
+  }
+
+  .stage.open {
+    height: 760px;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
- <div class="brand">EBEETH</div>
- <div class="brand-sub">ARTE & SABOR</div>
+  <div class="brand">EBEETH</div>
+  <div class="brand-sub">ARTE & SABOR</div>
 
- <div class="tagline">
-  Una invitación muy especial...
- </div>
-
- <div class="stage" id="stage">
-
-  <div class="invitation">
-
-   <div class="ornament">✧ ❀ ✧</div>
-   <div class="small-title">Estás invitado a celebrar</div>
-
-   <h2 id="name">Sofía</h2>
-
-   <div class="age">
-    <span id="age">7</span> años
-   </div>
-
-   <div class="message" id="message">
-    ¡Quiero compartir este día tan especial con vos!
-   </div>
-
-   <div class="line"></div>
-
-   <div class="details">
-    <div>♡ <strong>FECHA</strong> ♡</div>
-    <div id="date">Fecha del cumpleaños</div>
-
-    <div>♡ <strong>HORARIO</strong> ♡</div>
-    <div id="time">Horario</div>
-
-    <div>♡ <strong>LUGAR</strong> ♡</div>
-    <div id="place">EBEETH ARTE & SABOR</div>
-
-    <div id="address"></div>
-   </div>
-
-   <div class="line"></div>
-
-   <a class="button" id="map" href="#" target="_blank"
-      style="display:none">
-    📍 CÓMO LLEGAR
-   </a>
-
-   <a class="button whatsapp" id="rsvp" href="#">
-    💚 CONFIRMAR ASISTENCIA
-   </a>
-
-   <div class="ornament">✧ ♡ ✧</div>
-
-   <div class="footer">
-    Una creación especial de<br>
-    <strong>EBEETH ARTE & SABOR</strong>
-   </div>
-
+  <div class="tagline">
+    Una invitación muy especial...
   </div>
 
-  <div class="envelope" onclick="openInvitation()">
-   <div class="envelope-back"></div>
-   <div class="envelope-front"></div>
-   <div class="flap"></div>
-   <div class="seal">♥</div>
-  </div>
+  <div class="stage" id="stage">
 
-  <div class="tap">
-   ✨ Tocá el sobre para descubrir tu invitación ✨
-  </div>
+    <!-- TARJETA -->
 
- </div>
+    <div class="invitation">
+
+      <div class="ornament">✧ ❀ ✧</div>
+
+      <div class="small-title">
+        Estás invitado a celebrar
+      </div>
+
+      <h2 id="name">Sofía</h2>
+
+      <div class="age">
+        <span id="age">7</span> años
+      </div>
+
+      <div class="message" id="message">
+        ¡Quiero compartir este día tan especial con vos!
+      </div>
+
+      <div class="line"></div>
+
+      <div class="details">
+
+        <div>♡ <strong>FECHA</strong> ♡</div>
+        <div id="date">Fecha del cumpleaños</div>
+
+        <div>♡ <strong>HORARIO</strong> ♡</div>
+        <div id="time">Horario</div>
+
+        <div>♡ <strong>LUGAR</strong> ♡</div>
+        <div id="place">EBEETH ARTE & SABOR</div>
+
+        <div id="address"></div>
+
+      </div>
+
+      <div class="line"></div>
+
+      <a class="button" id="map" href="#" target="_blank"
+         rel="noopener noreferrer" style="display:none">
+        📍 CÓMO LLEGAR
+      </a>
+
+      <a class="button whatsapp" id="rsvp" href="#"
+         target="_blank" rel="noopener noreferrer">
+        💚 CONFIRMAR ASISTENCIA
+      </a>
+
+      <div class="ornament">✧ ♡ ✧</div>
+
+      <div class="footer">
+        Una creación especial de<br>
+        <strong>EBEETH ARTE & SABOR</strong>
+      </div>
+
+    </div>
+
+    <!-- SOBRE -->
+
+    <div class="envelope" onclick="openInvitation()">
+
+      <div class="envelope-back"></div>
+      <div class="envelope-front"></div>
+      <div class="flap"></div>
+
+      <div class="seal">♥</div>
+
+    </div>
+
+    <div class="tap">
+      ✨ Tocá el sobre para descubrir tu invitación ✨
+    </div>
+
+  </div>
 
 </div>
 
 <script>
+
+// DATOS PERSONALIZABLES POR ENLACE
+
 const params = new URLSearchParams(location.search);
 
-function dato(key, fallback){
- return params.get(key) || fallback;
+function dato(key, fallback) {
+  return params.get(key) || fallback;
 }
 
-document.getElementById("name").textContent =
- dato("nombre","Sofía");
+// NOMBRE
+
+const nombre = dato("nombre", "Sofía");
+
+document.getElementById("name").textContent = nombre;
+
+// EDAD
 
 document.getElementById("age").textContent =
- dato("edad","7");
+  dato("edad", "7");
+
+// FECHA
 
 document.getElementById("date").textContent =
- dato("fecha","Fecha del cumpleaños");
+  dato("fecha", "Fecha del cumpleaños");
+
+// HORARIO
 
 document.getElementById("time").textContent =
- dato("hora","Horario a confirmar");
+  dato("hora", "Horario a confirmar");
+
+// LUGAR
 
 document.getElementById("place").textContent =
- dato("lugar","EBEETH ARTE & SABOR");
+  dato("lugar", "EBEETH ARTE & SABOR");
+
+// DIRECCIÓN
 
 document.getElementById("address").textContent =
- dato("direccion","");
+  dato("direccion", "");
+
+// MENSAJE
 
 document.getElementById("message").textContent =
- dato("mensaje","¡Quiero compartir este día tan especial con vos!");
+  dato(
+    "mensaje",
+    "¡Quiero compartir este día tan especial con vos!"
+  );
 
-const telefono = dato("wa","5491100000000");
-const nombre = dato("nombre","Sofía");
+// WHATSAPP DEL ORGANIZADOR
+
+const telefono = dato("wa", "5491100000000");
 
 const mensaje =
- "¡Hola! Quiero confirmar mi asistencia al cumpleaños de "+nombre+".";
+  "¡Hola! Quiero confirmar mi asistencia al cumpleaños de " +
+  nombre + ".";
 
 document.getElementById("rsvp").href =
- "https://wa.me/"+telefono+"?text="+encodeURIComponent(mensaje);
+  "https://wa.me/" + telefono +
+  "?text=" + encodeURIComponent(mensaje);
 
-const mapa = dato("mapa","");
+// UBICACIÓN EN MAPS
 
-if(mapa){
- const boton=document.getElementById("map");
- boton.href=mapa;
- boton.style.display="block";
+const mapa = dato("mapa", "");
+
+if (mapa) {
+  const boton = document.getElementById("map");
+  boton.href = mapa;
+  boton.style.display = "block";
 }
 
-function openInvitation(){
- document.getElementById("stage").classList.add("open");
+// ABRIR SOBRE
+
+function openInvitation() {
+  document.getElementById("stage").classList.add("open");
 }
+
 </script>
 
 </body>
