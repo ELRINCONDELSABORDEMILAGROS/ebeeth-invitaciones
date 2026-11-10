@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EBEETH | Invitación especial</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ min-height:100vh;
+ font-family:Georgia,serif;
+ background:linear-gradient(135deg,#fff0f3,#fff9ed,#e5f8f5);
+ color:#754c42;
+ text-align:center;
+}
+.container{padding:35px 18px;max-width:520px;margin:auto}
+.brand{color:#bd8b3d;font-size:14px;letter-spacing:4px}
+h1{font-size:34px;color:#bd8b3d;margin:12px 0}
+.subtitle{font-style:italic;color:#a56c79}
+.envelope-area{margin:55px auto 25px;perspective:900px}
+.envelope{
+ position:relative;width:260px;height:170px;
+ margin:auto;cursor:pointer;
+ background:#e9a6b5;border-radius:5px;
+ box-shadow:0 12px 25px #9b657044;
+}
+.envelope:before{
+ content:"";position:absolute;inset:0;
+ background:#f4c4cd;
+ clip-path:polygon(0 0,100% 0,50% 65%);
+ transform-origin:top;
+ transition:transform 1s;z-index:3;
+}
+.envelope:after{
+ content:"";position:absolute;inset:0;
+ background:#d9879d;
+ clip-path:polygon(0 100%,50% 48%,100% 100%);
+ z-index:2;
+}
+.seal{
+ position:absolute;top:65px;left:calc(50% - 22px);
+ width:44px;height:44px;border-radius:50%;
+ background:#c49a4c;color:white;
+ display:grid;place-items:center;font-size:22px;z-index:4;
+}
+.envelope.open:before{transform:rotateX(180deg)}
+.envelope.open .seal{opacity:0}
+.tap{font-size:14px;margin-top:18px}
+.invitation{
+ display:none;background:#fffdf9;
+ border:2px solid #e8c98d;border-radius:22px;
+ padding:28px 20px;margin:25px auto;
+ box-shadow:0 10px 30px #a77a4030;
+ animation:appear 1s ease;
+}
+.invitation.show{display:block}
+@keyframes appear{
+ from{opacity:0;transform:translateY(25px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.invitation h2{font-size:32px;color:#bd8b3d;margin:12px}
+.age{font-size:52px;color:#d9879d;margin:8px}
+.details{line-height:1.9;font-size:16px}
+.btn{
+ display:block;text-decoration:none;
+ background:#bd8b3d;color:white;
+ padding:13px;border-radius:30px;
+ margin:12px auto;max-width:280px;
+ font-family:Arial,sans-serif;font-size:14px;
+}
+.btn.whatsapp{background:#218c58}
+.footer{font-size:12px;color:#aa8877;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="container">
+ <div class="brand">EBEETH</div>
+ <h1>Arte & Sabor</h1>
+ <div class="subtitle">Una celebración, un momento especial</div>
+
+ <div class="envelope-area">
+  <div class="envelope" id="envelope" onclick="openInvitation()">
+   <div class="seal">♥</div>
+  </div>
+  <div class="tap">✨ Tocá el sobre para abrir tu invitación ✨</div>
+ </div>
+
+ <section class="invitation" id="invitation">
+  <div style="font-size:35px">🎈🎂🎈</div>
+  <p>¡Estás invitado a celebrar!</p>
+  <h2 id="name">Sofía</h2>
+  <div class="age" id="age">7 años</div>
+  <p class="subtitle" id="message">¡Quiero compartir este día con vos!</p>
+  <hr style="border:0;border-top:1px solid #e8c98d">
+  <div class="details">
+   <div>📅 <span id="date">Fecha del cumpleaños</span></div>
+   <div>🕒 <span id="time">Horario</span></div>
+   <div>📍 <span id="place">EBEETH ARTE & SABOR</span></div>
+   <div id="address"></div>
+  </div>
+  <a class="btn" id="map" href="#" target="_blank" style="display:none">📍 Cómo llegar</a>
+  <a class="btn whatsapp" id="rsvp" href="#">💚 Confirmar asistencia</a>
+  <div style="font-size:23px;margin-top:20px">🎉 🥳 🎁</div>
+ </section>
+
+ <div class="footer">
+  Una invitación creada con cariño por<br>
+  <strong>EBEETH ARTE & SABOR</strong>
+ </div>
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+function dato(key, fallback){
+ return params.get(key) || fallback;
+}
+const nombre = dato("nombre","Sofía");
+const edad = dato("edad","7");
+const fecha = dato("fecha","Fecha del cumpleaños");
+const hora = dato("hora","Horario a confirmar");
+const lugar = dato("lugar","EBEETH ARTE & SABOR");
+const direccion = dato("direccion","");
+const mensaje = dato("mensaje","¡Quiero compartir este día con vos!");
+const telefono = dato("wa","5491100000000");
+const mapa = dato("mapa","");
+
+document.getElementById("name").textContent=nombre;
+document.getElementById("age").textContent=edad+" años";
+document.getElementById("date").textContent=fecha;
+document.getElementById("time").textContent=hora;
+document.getElementById("place").textContent=lugar;
+document.getElementById("address").textContent=direccion;
+document.getElementById("message").textContent=mensaje;
+
+const texto = "¡Hola! Confirmo mi asistencia al cumpleaños de "+nombre+".";
+document.getElementById("rsvp").href=
+ "https://wa.me/"+telefono+"?text="+encodeURIComponent(texto);
+
+if(mapa){
+ const boton=document.getElementById("map");
+ boton.href=mapa;
+ boton.style.display="block";
+}
+
+function openInvitation(){
+ document.getElementById("envelope").classList.add("open");
+ setTimeout(()=>{
+  document.getElementById("invitation").classList.add("show");
+ },500);
+}
+</script>
+</body>
+</html>
