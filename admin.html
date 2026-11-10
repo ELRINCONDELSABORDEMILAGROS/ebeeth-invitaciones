@@ -5,61 +5,142 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Panel EBEETH</title>
+
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;padding:22px 14px;
+  margin:0;
+  padding:22px 14px;
   background:linear-gradient(135deg,#fce8eb,#fff9f0);
-  font-family:Arial,sans-serif;color:#79545a
+  font-family:Arial,sans-serif;
+  color:#79545a;
 }
+
 .panel{
-  max-width:520px;margin:auto;background:white;
-  padding:25px;border-radius:18px;
+  max-width:520px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:18px;
   border:1px solid #e4c58c;
-  box-shadow:0 10px 30px #a8794520
+  box-shadow:0 10px 30px #a8794520;
 }
-h1{text-align:center;color:#bd914d;letter-spacing:3px}
-.subtitle{text-align:center;margin-bottom:25px}
-label{display:block;margin:14px 0 6px;font-weight:bold;font-size:13px}
+
+h1{
+  text-align:center;
+  color:#bd914d;
+  letter-spacing:3px;
+}
+
+.subtitle{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+label{
+  display:block;
+  margin:14px 0 6px;
+  font-weight:bold;
+  font-size:13px;
+}
+
 input,select,textarea{
-  width:100%;padding:12px;border:1px solid #e5cbd0;
-  border-radius:9px;font-size:15px;background:#fffdfc
+  width:100%;
+  padding:12px;
+  border:1px solid #e5cbd0;
+  border-radius:9px;
+  font-size:15px;
+  background:#fffdfc;
 }
+
 button{
-  width:100%;padding:14px;margin-top:18px;
-  border:0;border-radius:30px;background:#bd914d;
-  color:white;font-weight:bold;font-size:15px;cursor:pointer
+  width:100%;
+  padding:14px;
+  margin-top:18px;
+  border:0;
+  border-radius:30px;
+  background:#bd914d;
+  color:white;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
 }
+
+button:hover{
+  opacity:.9;
+}
+
 .result{
-  display:none;margin-top:20px;padding:15px;
-  background:#fff1f3;border-radius:12px;
-  overflow-wrap:anywhere
+  display:none;
+  margin-top:20px;
+  padding:15px;
+  background:#fff1f3;
+  border-radius:12px;
+  overflow-wrap:anywhere;
 }
-.result a{color:#a36e39}
-.secondary{background:#278e5b}
-.note{font-size:12px;color:#977d78;line-height:1.5}
+
+.result a{
+  color:#a36e39;
+}
+
+.secondary{
+  background:#278e5b;
+}
+
+.preview{
+  display:none;
+  width:100%;
+  max-height:250px;
+  object-fit:contain;
+  margin-top:12px;
+  border-radius:12px;
+  border:1px solid #e5cbd0;
+}
+
+.note{
+  font-size:12px;
+  color:#977d78;
+  line-height:1.5;
+}
+
+.section{
+  margin-top:25px;
+  padding-top:15px;
+  border-top:1px solid #ead9dc;
+}
+
 </style>
 </head>
 
 <body>
+
 <div class="panel">
 
 <h1>EBEETH</h1>
-<div class="subtitle">ARTE & SABOR<br>Panel de invitaciones digitales</div>
+
+<div class="subtitle">
+  ARTE & SABOR<br>
+  Panel de invitaciones digitales
+</div>
 
 <form id="formulario">
 
+<div class="section">
+<strong>DATOS DEL CUMPLEAÑOS</strong>
+
 <label>Nombre del cumpleañero/a</label>
-<input id="nombre" required placeholder="Ej. Sofía">
+<input id="nombre" required placeholder="Ej. Lucas">
 
 <label>Edad</label>
-<input id="edad" type="number" min="1" max="120" required placeholder="Ej. 7">
+<input id="edad" type="number" min="1" max="120"
+required placeholder="Ej. 2">
 
 <label>Fecha</label>
-<input id="fecha" required placeholder="Ej. 20 de diciembre">
+<input id="fecha" required placeholder="Ej. 12 de mayo">
 
 <label>Horario</label>
-<input id="hora" required placeholder="Ej. 17:00 hs">
+<input id="hora" required placeholder="Ej. 18:00 horas">
 
 <label>Nombre del salón o lugar</label>
 <input id="lugar" value="EBEETH ARTE & SABOR" required>
@@ -68,92 +149,227 @@ button{
 <input id="direccion" placeholder="Dirección del evento">
 
 <label>Enlace de Google Maps (opcional)</label>
-<input id="mapa" type="url" placeholder="https://maps.google.com/...">
+<input id="mapa" type="url"
+placeholder="https://maps.google.com/...">
+
+</div>
+
+<div class="section">
+<strong>CONFIRMACIÓN</strong>
 
 <label>WhatsApp para confirmar asistencia</label>
-<input id="wa" type="tel" required placeholder="54911XXXXXXXX">
+<input id="wa" type="tel" required
+placeholder="54911XXXXXXXX">
 
-<label>Temática del cumpleaños</label>
+<label>Mensaje personalizado</label>
+<textarea id="mensaje" rows="3"
+placeholder="¡Quiero compartir este día tan especial con vos!"></textarea>
+
+</div>
+
+<div class="section">
+<strong>DISEÑO DE LA INVITACIÓN</strong>
+
+<label>Elegir temática</label>
+
 <select id="tema">
+<option value="dinosaurios">Dinosaurios</option>
 <option value="princesas">Princesas</option>
 <option value="frozen">Frozen</option>
 <option value="sirenas">Sirenas</option>
 <option value="unicornios">Unicornios</option>
 <option value="futbol">Fútbol</option>
-<option value="dinosaurios">Dinosaurios</option>
+<option value="ositos">Ositos</option>
+<option value="mariposas">Mariposas</option>
+<option value="granja">Granja</option>
+<option value="personalizada">Otra temática</option>
 </select>
 
-<label>Mensaje personalizado (opcional)</label>
-<textarea id="mensaje" rows="3" placeholder="¡Te espero para celebrar conmigo!"></textarea>
+<label>URL de la imagen de la temática</label>
 
-<button type="submit">✨ GENERAR INVITACIÓN</button>
+<input
+  id="imagen"
+  type="url"
+  placeholder="https://.../imagen.jpg"
+>
+
+<p class="note">
+Pegá aquí el enlace directo de la ilustración.
+La imagen aparecerá dentro de la invitación cuando se abra el sobre.
+</p>
+
+<img id="preview" class="preview" alt="Vista previa de la temática">
+
+</div>
+
+<button type="submit">
+✨ GENERAR INVITACIÓN
+</button>
+
 </form>
 
 <div class="result" id="resultado">
+
 <strong>¡Tu invitación está lista! 💗</strong>
-<p class="note">Copiá este enlace y enviáselo a tu cliente para que lo comparta con sus invitados.</p>
+
+<p class="note">
+Copiá este enlace y enviáselo a tu cliente para compartirlo con sus invitados.
+</p>
+
 <a id="enlace" href="#" target="_blank"></a>
-<button class="secondary" type="button" onclick="copiar()">COPIAR ENLACE</button>
-<button type="button" onclick="abrir()">VER INVITACIÓN</button>
+
+<button class="secondary" type="button" onclick="copiar()">
+COPIAR ENLACE
+</button>
+
+<button type="button" onclick="abrir()">
+VER INVITACIÓN
+</button>
+
 </div>
 
 </div>
 
 <script>
+
 let enlaceGenerado = "";
 
-document.getElementById("formulario").addEventListener("submit",function(e){
+// VISTA PREVIA DE LA IMAGEN
+
+const campoImagen = document.getElementById("imagen");
+const preview = document.getElementById("preview");
+
+campoImagen.addEventListener("input",function(){
+
+  const url = this.value.trim();
+
+  if(url){
+
+    preview.src = url;
+    preview.style.display = "block";
+
+    preview.onerror = function(){
+      preview.style.display = "none";
+    };
+
+  }else{
+
+    preview.style.display = "none";
+
+  }
+
+});
+
+// GENERAR INVITACIÓN
+
+document.getElementById("formulario")
+.addEventListener("submit",function(e){
+
   e.preventDefault();
 
   const datos = {
+
     nombre:document.getElementById("nombre").value.trim(),
+
     edad:document.getElementById("edad").value,
+
     fecha:document.getElementById("fecha").value.trim(),
+
     hora:document.getElementById("hora").value.trim(),
+
     lugar:document.getElementById("lugar").value.trim(),
+
     direccion:document.getElementById("direccion").value.trim(),
+
     mapa:document.getElementById("mapa").value.trim(),
+
     wa:document.getElementById("wa").value.replace(/\D/g,""),
+
     tema:document.getElementById("tema").value,
+
+    imagen:document.getElementById("imagen").value.trim(),
+
     mensaje:document.getElementById("mensaje").value.trim()
+
   };
 
-  if(!/^https:\/\//i.test(datos.mapa) && datos.mapa){
+  // VALIDAR MAPS
+
+  if(datos.mapa && !/^https:\/\//i.test(datos.mapa)){
+
     alert("El enlace de Maps debe comenzar con https://");
     return;
+
   }
+
+  // VALIDAR WHATSAPP
 
   if(datos.wa.length < 10){
+
     alert("Revisá el número de WhatsApp con código de país y área.");
     return;
+
   }
 
+  // VALIDAR IMAGEN
+
+  if(datos.imagen && !/^https:\/\//i.test(datos.imagen)){
+
+    alert("La URL de la imagen debe comenzar con https://");
+    return;
+
+  }
+
+  // GENERAR ENLACE
+
   const base = new URL("index.html",window.location.href);
+
   base.search = new URLSearchParams(datos).toString();
 
   enlaceGenerado = base.href;
 
   document.getElementById("enlace").href = enlaceGenerado;
+
   document.getElementById("enlace").textContent = enlaceGenerado;
+
   document.getElementById("resultado").style.display = "block";
 
   document.getElementById("resultado").scrollIntoView({
     behavior:"smooth"
   });
+
 });
 
+// COPIAR ENLACE
+
 async function copiar(){
+
   try{
+
     await navigator.clipboard.writeText(enlaceGenerado);
+
     alert("¡Enlace copiado! Ya podés compartirlo.");
+
   }catch(e){
+
     alert("No se pudo copiar automáticamente. Seleccioná y copiá el enlace.");
+
   }
+
 }
 
+// ABRIR INVITACIÓN
+
 function abrir(){
-  if(enlaceGenerado) window.open(enlaceGenerado,"_blank");
+
+  if(enlaceGenerado){
+
+    window.open(enlaceGenerado,"_blank");
+
+  }
+
 }
+
 </script>
 
 </body>
